@@ -1,0 +1,8 @@
+# Write your MySQL query statement below
+SELECT actor_id, director_id
+FROM (
+    SELECT *,
+    ROW_NUMBER() OVER(PARTITION BY actor_id, director_id ORDER BY timestamp ASC) AS RN
+    FROM ActorDirector
+) AS Subquery
+WHERE RN = 3
